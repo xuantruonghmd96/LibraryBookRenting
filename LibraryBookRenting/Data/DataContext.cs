@@ -1,4 +1,6 @@
 ﻿using LibraryBookRenting.Domain;
+using LibraryBookRenting.Domain.Infastructure;
+using LibraryBookRenting.Extensions;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,9 +20,10 @@ namespace LibraryBookRenting.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<ApplicationUser>()
-                .Property(x => x.CreditCount)
-                .HasDefaultValue(100);
+            var entitiesAssembly = typeof(IEntity).Assembly;
+
+            builder.RegisterEntityTypeConfiguration(entitiesAssembly);
+            builder.AddRestrictDeleteBehaviorConvention();
         }
     }
 }

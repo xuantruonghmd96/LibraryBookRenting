@@ -10,6 +10,8 @@ namespace LibraryBookRenting.Contracts.Responses
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public int Price { get; set; }
+        public int Quantity { get; set; }
 
         public BookResponse()
         {
@@ -19,6 +21,8 @@ namespace LibraryBookRenting.Contracts.Responses
         {
             this.Id = book.Id;
             this.Name = book.Name;
+            this.Price = book.Price;
+            this.Quantity = book.Quantity;
         }
     }
 }
