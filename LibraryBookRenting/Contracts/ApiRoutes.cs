@@ -16,5 +16,10 @@ namespace LibraryBookRenting.Contracts
             public const string Create = Root + "/user";
             public const string Signin = Root + "/user/signin";
         }
+
+        public static class BookRoutes
+        {
+            public const string GetAll = Root + "/book";
+        }
     }
 }

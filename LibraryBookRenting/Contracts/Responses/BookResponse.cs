@@ -11,6 +11,10 @@ namespace LibraryBookRenting.Contracts.Responses
         public Guid Id { get; set; }
         public string Name { get; set; }
 
+        public BookResponse()
+        {
+        }
+
         public BookResponse(Book book)
         {
             this.Id = book.Id;

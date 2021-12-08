@@ -23,13 +23,13 @@ namespace LibraryBookRenting.Controllers
             _bookService = bookService;
         }
 
-        [HttpGet(ApiRoutes.UserRoutes.GetAll)]
+        [HttpGet(ApiRoutes.BookRoutes.GetAll)]
         public IActionResult Get()
         {
             return Ok(_bookService.GetAll());
         }
 
-        [HttpPut(ApiRoutes.UserRoutes.GetAll)]
+        [HttpPut(ApiRoutes.BookRoutes.GetAll)]
         public IActionResult Update(Guid bookId, [FromBody] CreateUserRequest request)
         {
             IActionResult actionResult;
