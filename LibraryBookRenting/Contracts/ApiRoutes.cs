@@ -12,9 +12,13 @@ namespace LibraryBookRenting.Contracts
         public static class UserRoutes
         {
             public const string GetAll = Root + "/user";
-            public const string GetById = Root + "/user/{userId:Guid}";
             public const string Create = Root + "/user";
             public const string Signin = Root + "/user/signin";
+            public const string RentBook = Root + "/user/book";
+            public const string GetBook = Root + "/user/book";
+            public const string GetBookExpireInWeek = Root + "/user/book-expire-in-week";
+            public const string GetBookExpired = Root + "/user/book-expired";
+            public const string GetBookNotExpired = Root + "/user/book-expired";
         }
 
         public static class BookRoutes

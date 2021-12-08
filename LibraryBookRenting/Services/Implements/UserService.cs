@@ -1,4 +1,5 @@
 ﻿using LibraryBookRenting.Contracts.Responses;
+using LibraryBookRenting.Domain;
 using LibraryBookRenting.Installers;
 using LibraryBookRenting.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -15,10 +16,10 @@ namespace LibraryBookRenting.Services.Implements
 {
     public class UserService : IUserService
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly JwtSettings _jwtSettings;
 
-        public UserService(UserManager<IdentityUser> userManager, JwtSettings jwtSettings)
+        public UserService(UserManager<ApplicationUser> userManager, JwtSettings jwtSettings)
         {
             _userManager = userManager;
             _jwtSettings = jwtSettings;
@@ -36,9 +37,10 @@ namespace LibraryBookRenting.Services.Implements
                 };
             }
 
-            var newUser = new IdentityUser
+            var newUser = new ApplicationUser
             {
                 UserName = userName,
+                //CreditCount = 100,
             };
             var createdUser = await _userManager.CreateAsync(newUser, password);
             if (!createdUser.Succeeded)
@@ -79,7 +81,7 @@ namespace LibraryBookRenting.Services.Implements
             }
         }
 
-        private AuthenticationResponse GenerateAuthenticationResponse(IdentityUser newUser)
+        private AuthenticationResponse GenerateAuthenticationResponse(ApplicationUser newUser)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtSettings.Secret);
