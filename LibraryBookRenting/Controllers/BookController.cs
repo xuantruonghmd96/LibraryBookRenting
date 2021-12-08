@@ -2,6 +2,7 @@
 using LibraryBookRenting.Contracts.Requests;
 using LibraryBookRenting.Contracts.Responses;
 using LibraryBookRenting.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 namespace LibraryBookRenting.Controllers
 {
     [ApiController]
+    [Authorize]
     public class BookController : BaseController
     {
         private readonly IBookService _bookService;
