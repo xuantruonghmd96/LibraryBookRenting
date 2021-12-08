@@ -14,6 +14,7 @@ namespace LibraryBookRenting.Contracts
             public const string GetAll = Root + "/user";
             public const string GetById = Root + "/user/{userId:Guid}";
             public const string Create = Root + "/user";
+            public const string Signin = Root + "/user/signin";
         }
     }
 }

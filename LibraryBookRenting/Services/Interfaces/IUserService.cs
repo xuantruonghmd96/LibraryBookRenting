@@ -9,5 +9,6 @@ namespace LibraryBookRenting.Services.Interfaces
     public interface IUserService
     {
         Task<AuthenticationResponse> SignupAsync(string userName, string password);
+        Task<AuthenticationResponse> SigninAsync(string userName, string password);
     }
 }

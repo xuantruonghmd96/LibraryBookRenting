@@ -32,7 +32,7 @@ namespace LibraryBookRenting.Services.Implements
             {
                 return new AuthenticationResponse
                 {
-                    ErrorMessage = new [] { "User name is exists" } 
+                    ErrorMessages = new[] { "User name is exists" }
                 };
             }
 
@@ -45,10 +45,42 @@ namespace LibraryBookRenting.Services.Implements
             {
                 return new AuthenticationResponse
                 {
-                    ErrorMessage = createdUser.Errors.Select(x => x.Description)
+                    ErrorMessages = createdUser.Errors.Select(x => x.Description)
                 };
             }
 
+            return GenerateAuthenticationResponse(newUser);
+        }
+
+        public async Task<AuthenticationResponse> SigninAsync(string userName, string password)
+        {
+            var user = await _userManager.FindByNameAsync(userName);
+
+            if (user == null)
+            {
+                return new AuthenticationResponse
+                {
+                    ErrorMessages = new[] { "User does not exists" }
+                };
+            }
+
+            var userHasValidPassword = await _userManager.CheckPasswordAsync(user, password);
+
+            if (!userHasValidPassword)
+            {
+                return new AuthenticationResponse
+                {
+                    ErrorMessages = new[] { "Password does not match" }
+                };
+            }
+            else
+            {
+                return GenerateAuthenticationResponse(user);
+            }
+        }
+
+        private AuthenticationResponse GenerateAuthenticationResponse(IdentityUser newUser)
+        {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor

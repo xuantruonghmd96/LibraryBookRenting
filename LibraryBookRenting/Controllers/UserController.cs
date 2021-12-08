@@ -18,10 +18,25 @@ namespace LibraryBookRenting.Controllers
             _userService = userService;
         }
 
-        [HttpPost(ApiRoutes.UserRoutes.GetAll)]
+        [HttpPost(ApiRoutes.UserRoutes.Create)]
         public async Task<IActionResult> Signup([FromBody] CreateUserRequest request)
         {
             var authResponse = await _userService.SignupAsync(request.UserName, request.Password);
+
+            if (!authResponse.IsSuccess)
+            {
+                return BadRequest(authResponse);
+            }
+            else
+            {
+                return Ok(authResponse);
+            }
+        }
+
+        [HttpPost(ApiRoutes.UserRoutes.Signin)]
+        public async Task<IActionResult> Signin([FromBody] CreateUserRequest request)
+        {
+            var authResponse = await _userService.SigninAsync(request.UserName, request.Password);
 
             if (!authResponse.IsSuccess)
             {

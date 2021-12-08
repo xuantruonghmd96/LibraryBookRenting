@@ -9,6 +9,6 @@ namespace LibraryBookRenting.Contracts.Responses
     {
         public string Token { get; set; }
         public bool IsSuccess { get; set; }
-        public IEnumerable<string> ErrorMessage { get; set; }
+        public IEnumerable<string> ErrorMessages { get; set; }
     }
 }
