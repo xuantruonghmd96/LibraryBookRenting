@@ -4,11 +4,50 @@
         <name>LibraryBookRenting</name>
     </assembly>
     <members>
+        <member name="M:LibraryBookRenting.Controllers.UserController.Signup(LibraryBookRenting.Contracts.Requests.CreateUserRequest)">
+            <summary>
+            Signup
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LibraryBookRenting.Controllers.UserController.Signin(LibraryBookRenting.Contracts.Requests.CreateUserRequest)">
+            <summary>
+            Signin
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
         <member name="M:LibraryBookRenting.Controllers.UserController.RentBooks(LibraryBookRenting.Contracts.Requests.RentBooksRequest)">
             <summary>
             Rent Books
             </summary>
             <param name="request">List BookId</param>
+            <returns></returns>
+        </member>
+        <member name="M:LibraryBookRenting.Controllers.UserController.GetBookRented">
+            <summary>
+            Get List Book of User, 
+            UserId will taked in JWT Token, so the user can only see their books
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LibraryBookRenting.Controllers.UserController.GetBookExpireInWeek">
+            <summary>
+            Get List Book of User will expire in a week
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LibraryBookRenting.Controllers.UserController.GetBookExpired">
+            <summary>
+            Get List Book of User that has expired
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LibraryBookRenting.Controllers.UserController.GetBookNotExpired">
+            <summary>
+            Get List Book of User that is not expired
+            </summary>
             <returns></returns>
         </member>
         <member name="M:LibraryBookRenting.Extensions.ModelBuilderExtensions.RegisterEntityTypeConfiguration(Microsoft.EntityFrameworkCore.ModelBuilder,System.Reflection.Assembly[])">
@@ -23,6 +62,15 @@
             Set DeleteBehavior.Restrict by default for relations
             </summary>
             <param name="modelBuilder"></param>
+        </member>
+        <member name="M:LibraryBookRenting.Services.Interfaces.IUserService.GetBookRented(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Get book of a user
+            </summary>
+            <param name="userId"></param>
+            <param name="from">renting will greater or equal from</param>
+            <param name="to">renting will less than to</param>
+            <returns></returns>
         </member>
     </members>
 </doc>

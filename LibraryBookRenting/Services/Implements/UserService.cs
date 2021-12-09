@@ -237,5 +237,29 @@ namespace LibraryBookRenting.Services.Implements
                 }
             }
         }
+
+        public IEnumerable<BookResponse> GetBookRented(string userId, DateTime? from, DateTime? to)
+        {
+            var rentingOfUser = _dbContext.UserBookRentings
+                .Where(x => x.UserId == userId
+                    && (!from.HasValue || x.ExpiredDate >= from)
+                    && (!to.HasValue || x.ExpiredDate < to)
+                )
+                .Select(x => new BookResponse
+                {
+                    Id = x.BookId,
+                    Name = x.Book.Name,
+                    Price = x.Book.Price,
+                    Quantity = x.Quantity,
+                }).ToList();
+
+            return rentingOfUser.GroupBy(x => x.Id).Select(x => new BookResponse
+            {
+                Id = x.Key,
+                Name = x.First().Name,
+                Price = x.First().Price,
+                Quantity = x.Sum(y => y.Quantity)
+            });
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using LibraryBookRenting.Contracts;
 using LibraryBookRenting.Contracts.Requests;
+using LibraryBookRenting.Contracts.Responses;
 using LibraryBookRenting.Extensions;
 using LibraryBookRenting.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -20,6 +21,11 @@ namespace LibraryBookRenting.Controllers
             _userService = userService;
         }
 
+        /// <summary>
+        /// Signup
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost(ApiRoutes.UserRoutes.Create)]
         public async Task<IActionResult> Signup([FromBody] CreateUserRequest request)
         {
@@ -35,6 +41,11 @@ namespace LibraryBookRenting.Controllers
             }
         }
 
+        /// <summary>
+        /// Signin
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost(ApiRoutes.UserRoutes.Signin)]
         public async Task<IActionResult> Signin([FromBody] CreateUserRequest request)
         {
@@ -82,6 +93,55 @@ namespace LibraryBookRenting.Controllers
             }
 
             return actionResult;
+        }
+
+        /// <summary>
+        /// Get List Book of User, 
+        /// UserId will taked in JWT Token, so the user can only see their books
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet(ApiRoutes.UserRoutes.GetBook)]
+        [Authorize]
+        public async Task<IEnumerable<BookResponse>> GetBookRented()
+        {
+            var userId = HttpContext.GetUserId();
+            return _userService.GetBookRented(userId);
+        }
+
+        /// <summary>
+        /// Get List Book of User will expire in a week
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet(ApiRoutes.UserRoutes.GetBookExpireInWeek)]
+        [Authorize]
+        public async Task<IEnumerable<BookResponse>> GetBookExpireInWeek()
+        {
+            var userId = HttpContext.GetUserId();
+            return _userService.GetBookRented(userId, DateTime.Now.Date, DateTime.Now.Date.AddDays(7));
+        }
+
+        /// <summary>
+        /// Get List Book of User that has expired
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet(ApiRoutes.UserRoutes.GetBookExpired)]
+        [Authorize]
+        public async Task<IEnumerable<BookResponse>> GetBookExpired()
+        {
+            var userId = HttpContext.GetUserId();
+            return _userService.GetBookRented(userId, null, DateTime.Now.Date);
+        }
+
+        /// <summary>
+        /// Get List Book of User that is not expired
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet(ApiRoutes.UserRoutes.GetBookNotExpired)]
+        [Authorize]
+        public async Task<IEnumerable<BookResponse>> GetBookNotExpired()
+        {
+            var userId = HttpContext.GetUserId();
+            return _userService.GetBookRented(userId, DateTime.Now.Date, null);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace LibraryBookRenting.Contracts
             public const string GetBook = Root + "/user/book";
             public const string GetBookExpireInWeek = Root + "/user/book-expire-in-week";
             public const string GetBookExpired = Root + "/user/book-expired";
-            public const string GetBookNotExpired = Root + "/user/book-expired";
+            public const string GetBookNotExpired = Root + "/user/book-not-expired";
         }
 
         public static class BookRoutes
