@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,6 +69,9 @@ namespace LibraryBookRenting.Installers
                         new List<string>()
                     }
                 });
+
+                var filePath = Path.Combine(System.AppContext.BaseDirectory, "LibraryBookRenting.xml");
+                c.IncludeXmlComments(filePath);
             });
 
             InstallBussinessService(services, configuration);

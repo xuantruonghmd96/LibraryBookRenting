@@ -5,6 +5,10 @@
     <UserSecretsId>aspnet-LibraryBookRenting-1F3C04E8-DED8-48F1-B142-A6BA5F834625</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\ONGOING\LibraryBookRenting\LibraryBookRenting\LibraryBookRenting.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.12" />

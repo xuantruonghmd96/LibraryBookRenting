@@ -1,4 +1,6 @@
-﻿using LibraryBookRenting.Contracts.Responses;
+﻿using LibraryBookRenting.Contracts;
+using LibraryBookRenting.Contracts.Requests;
+using LibraryBookRenting.Contracts.Responses;
 using LibraryBookRenting.Domain;
 using LibraryBookRenting.Installers;
 using LibraryBookRenting.Services.Interfaces;
@@ -101,6 +103,11 @@ namespace LibraryBookRenting.Services.Implements
                 IsSuccess = true,
                 Token = tokenHandler.WriteToken(token),
             };
+        }
+
+        public int RentBooks(RentBooksRequest request, ref ErrorModel errors)
+        {
+            throw new NotImplementedException();
         }
     }
 }

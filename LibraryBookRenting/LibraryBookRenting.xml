@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LibraryBookRenting</name>
+    </assembly>
+    <members>
+        <member name="M:LibraryBookRenting.Controllers.UserController.RentBooks(LibraryBookRenting.Contracts.Requests.RentBooksRequest)">
+            <summary>
+            Rent Books
+            </summary>
+            <param name="request">List BookId</param>
+            <returns></returns>
+        </member>
+        <member name="M:LibraryBookRenting.Extensions.ModelBuilderExtensions.RegisterEntityTypeConfiguration(Microsoft.EntityFrameworkCore.ModelBuilder,System.Reflection.Assembly[])">
+            <summary>
+            Dynamicaly load all IEntityTypeConfiguration with Reflection
+            </summary>
+            <param name="modelBuilder"></param>
+            <param name="assemblies">Assemblies contains Entities</param>
+        </member>
+        <member name="M:LibraryBookRenting.Extensions.ModelBuilderExtensions.AddRestrictDeleteBehaviorConvention(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Set DeleteBehavior.Restrict by default for relations
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+    </members>
+</doc>

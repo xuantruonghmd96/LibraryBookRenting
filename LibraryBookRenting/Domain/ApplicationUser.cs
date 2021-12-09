@@ -14,6 +14,8 @@ namespace LibraryBookRenting.Domain
     public class ApplicationUser : IdentityUser
     {
         public virtual int CreditCount { get; set; }
+
+        public virtual ICollection<UserBookRenting> UserBookRentings { get; set; }
     }
 
     public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>

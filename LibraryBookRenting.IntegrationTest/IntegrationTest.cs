@@ -20,7 +20,7 @@ namespace LibraryBookRenting.IntegrationTest
 {
     public class IntegrationTest
     {
-        protected readonly HttpClient _testClient;
+        protected HttpClient _testClient;
 
         protected IntegrationTest()
         {

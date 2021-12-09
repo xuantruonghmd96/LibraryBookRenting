@@ -12,6 +12,7 @@ namespace LibraryBookRenting.Data
     public class DataContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Book> Books { get; set; }
+        public DbSet<UserBookRenting> UserBookRentings { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
