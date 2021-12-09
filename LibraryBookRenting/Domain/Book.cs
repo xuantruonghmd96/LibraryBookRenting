@@ -14,7 +14,6 @@ namespace LibraryBookRenting.Domain
     {
         public string Name { get; set; }
         public int Price { get; set; }
-        public int Quantity { get; set; }
 
         public virtual ICollection<UserBookRenting> UserBookRentings { get; set; }
     }
@@ -23,8 +22,8 @@ namespace LibraryBookRenting.Domain
     {
         public void Configure(EntityTypeBuilder<Book> builder)
         {
-            builder.Property(x => x.Quantity)
-                .HasDefaultValue(MyAppSettings.BussinessConfiguration.BookQuantityInStock);
+            //builder.Property(x => x.Quantity)
+            //    .HasDefaultValue(MyAppSettings.BussinessConfiguration.BookQuantityInStock);
         }
     }
 }

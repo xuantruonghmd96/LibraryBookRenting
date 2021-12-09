@@ -12,6 +12,6 @@ namespace LibraryBookRenting.Services.Interfaces
     {
         Task<AuthenticationResponse> SignupAsync(string userName, string password);
         Task<AuthenticationResponse> SigninAsync(string userName, string password);
-        int RentBooks(RentBooksRequest request, ref ErrorModel errors);
+        Task<int> RentBooks(string userId, RentBooksRequest request, ErrorModel errors);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using LibraryBookRenting.Contracts;
 using LibraryBookRenting.Contracts.Requests;
+using LibraryBookRenting.Extensions;
 using LibraryBookRenting.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -56,7 +57,7 @@ namespace LibraryBookRenting.Controllers
         /// <returns></returns>
         [HttpPost(ApiRoutes.UserRoutes.RentBook)]
         [Authorize]
-        public IActionResult RentBooks([FromBody] RentBooksRequest request)
+        public async Task<IActionResult> RentBooks([FromBody] RentBooksRequest request)
         {
             IActionResult actionResult;
             ErrorModel errors = new ErrorModel();
@@ -68,7 +69,8 @@ namespace LibraryBookRenting.Controllers
             }
             else
             {
-                var bookRented = _userService.RentBooks(request, ref errors);
+                var userId = HttpContext.GetUserId();
+                var bookRented = await _userService.RentBooks(userId, request, errors);
                 if (errors.IsEmpty)
                 {
                     actionResult = Ok(bookRented);

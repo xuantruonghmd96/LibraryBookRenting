@@ -15,5 +15,10 @@ namespace LibraryBookRenting.Contracts.Requests
     public class RentBooksRequest
     {
         public List<RentBook> Books { get; set; }
+
+        public RentBooksRequest()
+        {
+            Books = new List<RentBook>();
+        }
     }
 }

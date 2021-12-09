@@ -22,7 +22,6 @@ namespace LibraryBookRenting.Contracts.Responses
             this.Id = book.Id;
             this.Name = book.Name;
             this.Price = book.Price;
-            this.Quantity = book.Quantity;
         }
     }
 }

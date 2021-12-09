@@ -9,5 +9,10 @@ namespace LibraryBookRenting.Contracts
     {
         public List<string> ErrorMessages { get; set; }
         public bool IsEmpty { get => ErrorMessages.Count == 0; }
+
+        public ErrorModel()
+        {
+            ErrorMessages = new List<string>();
+        }
     }
 }
