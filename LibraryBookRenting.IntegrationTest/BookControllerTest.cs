@@ -15,18 +15,18 @@ namespace LibraryBookRenting.IntegrationTest
 {
     public class BookControllerTest : IntegrationTest
     {
-        [Fact]
-        public async Task GetAll_WithEmpty()
-        {
-            //Arrange
-            await AuthenticateAsync();
+        //[Fact]
+        //public async Task GetAll_WithEmpty()
+        //{
+        //    //Arrange
+        //    await AuthenticateAsync();
 
-            //Act
-            var response = await _testClient.GetAsync(ApiRoutes.BookRoutes.GetAll);
+        //    //Act
+        //    var response = await _testClient.GetAsync(ApiRoutes.BookRoutes.GetAll);
 
-            //Assert
-            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-            (await DeserializeResponseJson<List<BookResponse>>(response.Content)).Count.Should().Be(4);
-        }
+        //    //Assert
+        //    response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        //    (await DeserializeResponseJson<List<BookResponse>>(response.Content)).Count.Should().Be(4);
+        //}
     }
 }

@@ -12,39 +12,39 @@ using System.Threading.Tasks;
 
 namespace LibraryBookRenting.Controllers
 {
-    [ApiController]
-    [Authorize]
-    public class BookController : BaseController
-    {
-        private readonly IBookService _bookService;
+    //[ApiController]
+    //[Authorize]
+    //public class BookController : BaseController
+    //{
+    //    private readonly IBookService _bookService;
 
-        public BookController(IBookService bookService)
-        {
-            _bookService = bookService;
-        }
+    //    public BookController(IBookService bookService)
+    //    {
+    //        _bookService = bookService;
+    //    }
 
-        [HttpGet(ApiRoutes.BookRoutes.GetAll)]
-        public IActionResult Get()
-        {
-            return Ok(_bookService.GetAll());
-        }
+    //    [HttpGet(ApiRoutes.BookRoutes.GetAll)]
+    //    public IActionResult Get()
+    //    {
+    //        return Ok(_bookService.GetAll());
+    //    }
 
-        [HttpPut(ApiRoutes.BookRoutes.GetAll)]
-        public IActionResult Update(Guid bookId, [FromBody] CreateUserRequest request)
-        {
-            IActionResult actionResult;
-            ErrorModel errors = new ErrorModel();
+    //    [HttpPut(ApiRoutes.BookRoutes.GetAll)]
+    //    public IActionResult Update(Guid bookId, [FromBody] CreateUserRequest request)
+    //    {
+    //        IActionResult actionResult;
+    //        ErrorModel errors = new ErrorModel();
 
-            _bookService.UpdateBook(bookId, request, ref errors);
+    //        _bookService.UpdateBook(bookId, request, ref errors);
 
-            if (errors.IsEmpty)
-            {
-                return Ok(bookId);
-            }
-            else
-            {
-                return BadRequest(errors);
-            }
-        }
-    }
+    //        if (errors.IsEmpty)
+    //        {
+    //            return Ok(bookId);
+    //        }
+    //        else
+    //        {
+    //            return BadRequest(errors);
+    //        }
+    //    }
+    //}
 }
