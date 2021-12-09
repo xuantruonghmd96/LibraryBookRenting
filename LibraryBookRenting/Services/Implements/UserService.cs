@@ -218,6 +218,7 @@ namespace LibraryBookRenting.Services.Implements
                                     ExpiredDate = item.ExpiredDate,
                                 });
                             }
+                            user.CreditCount -= amount;
                         }
 
                         context.SaveChanges();
