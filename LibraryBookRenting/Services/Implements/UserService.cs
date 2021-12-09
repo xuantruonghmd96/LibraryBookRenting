@@ -261,5 +261,28 @@ namespace LibraryBookRenting.Services.Implements
                 Quantity = x.Sum(y => y.Quantity)
             });
         }
+
+        public void SubstractCreditsEveryDay()
+        {
+            //TODO: write this raw SQL to StoredProcedure
+            var dictUserCreditSubstract = _dbContext.Database.ExecuteSqlRaw(@"
+                UPDATE AspNetUsers
+                SET CreditCount = U.CreditCount - (USER_CREDIT.CreditCount / 5)
+                FROM AspNetUsers AS U
+                INNER JOIN
+                (
+	                SELECT UserId as UserId, SUM(AMOUNT) as CreditCount
+	                FROM
+	                (
+		                SELECT R.UserId AS UserId, R.BookId AS BookId, SUM(R.Quantity * B.Price) AS AMOUNT
+		                FROM UserBookRentings R
+		                LEFT JOIN BOOKS B ON R.BookId = B.ID
+		                WHERE R.ExpiredDate <= CONVERT(date, getdate())
+		                GROUP BY R.USERID, R.BOOKID 
+	                ) AS T
+	                GROUP BY USERID
+                ) AS USER_CREDIT ON USER_CREDIT.UserId = U.Id
+            ");
+        }
     }
 }

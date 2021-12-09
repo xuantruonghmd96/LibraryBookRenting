@@ -21,5 +21,6 @@ namespace LibraryBookRenting.Services.Interfaces
         /// <param name="to">renting will less than to</param>
         /// <returns></returns>
         IEnumerable<BookResponse> GetBookRented(string userId, DateTime? from = null, DateTime? to = null);
+        void SubstractCreditsEveryDay();
     }
 }

@@ -1,4 +1,6 @@
+using Hangfire;
 using LibraryBookRenting.Data;
+using LibraryBookRenting.Extensions;
 using LibraryBookRenting.Installers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,7 +40,7 @@ namespace LibraryBookRenting
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IBackgroundJobClient backgroundJobs)
         {
             if (env.IsDevelopment())
             {
@@ -54,6 +56,9 @@ namespace LibraryBookRenting
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseHangfireDashboard();
+            app.SetupBackgroundJob();
+
             app.UseRouting();
 
             app.UseAuthentication();
@@ -62,6 +67,7 @@ namespace LibraryBookRenting
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHangfireDashboard();
             });
         }
     }

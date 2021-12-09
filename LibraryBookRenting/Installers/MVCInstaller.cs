@@ -1,4 +1,6 @@
-﻿using LibraryBookRenting.Services.Implements;
+﻿using Hangfire;
+using Hangfire.SqlServer;
+using LibraryBookRenting.Services.Implements;
 using LibraryBookRenting.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +20,23 @@ namespace LibraryBookRenting.Installers
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
+            // Add Hangfire services.
+            services.AddHangfire(c => c
+                .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                .UseSimpleAssemblyNameTypeSerializer()
+                .UseRecommendedSerializerSettings()
+                .UseSqlServerStorage(configuration.GetConnectionString("DefaultConnection"), new SqlServerStorageOptions
+                {
+                    CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                    SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                    QueuePollInterval = TimeSpan.Zero,
+                    UseRecommendedIsolationLevel = true,
+                    DisableGlobalLocks = true
+                }));
+
+            // Add the processing server as IHostedService
+            services.AddHangfireServer();
+
             services.AddControllers();
 
             services.AddAuthentication(x =>

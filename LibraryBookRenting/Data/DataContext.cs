@@ -13,6 +13,7 @@ namespace LibraryBookRenting.Data
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<UserBookRenting> UserBookRentings { get; set; }
+        public DbSet<UserCreditModel> UserCreditModels { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
@@ -26,6 +27,8 @@ namespace LibraryBookRenting.Data
             var entitiesAssembly = typeof(IEntity).Assembly;
             builder.RegisterEntityTypeConfiguration(entitiesAssembly);
             builder.AddRestrictDeleteBehaviorConvention();
+
+            builder.Entity<UserCreditModel>().ToTable("notable", t => t.ExcludeFromMigrations());
         }
     }
 }
