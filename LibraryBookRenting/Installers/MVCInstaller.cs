@@ -19,10 +19,6 @@ namespace LibraryBookRenting.Installers
         {
             services.AddControllers();
 
-            var jwtSettings = new JwtSettings();
-            configuration.Bind(nameof(jwtSettings), jwtSettings);
-            services.AddSingleton(jwtSettings);
-
             services.AddAuthentication(x =>
                 {
                     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -34,7 +30,7 @@ namespace LibraryBookRenting.Installers
                     x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Secret)),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(MyAppSettings.JwtSettings.Secret)),
                         ValidateIssuer = false,
                         ValidateAudience = false,
                         RequireExpirationTime = false,

@@ -29,6 +29,9 @@ namespace LibraryBookRenting
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Configuration.GetSection(nameof(JwtSettings)).Bind(MyAppSettings.JwtSettings);
+            Configuration.GetSection(nameof(BussinessConfiguration)).Bind(MyAppSettings.BussinessConfiguration);
+
             var installers = typeof(Startup).Assembly.ExportedTypes.Where(x =>
                 typeof(IInstaller).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract).Select(Activator.CreateInstance).Cast<IInstaller>().ToList();
             installers.ForEach(x => x.InstallServices(services, Configuration));

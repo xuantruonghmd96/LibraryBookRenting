@@ -17,12 +17,10 @@ namespace LibraryBookRenting.Services.Implements
     public class UserService : IUserService
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly JwtSettings _jwtSettings;
 
-        public UserService(UserManager<ApplicationUser> userManager, JwtSettings jwtSettings)
+        public UserService(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
-            _jwtSettings = jwtSettings;
         }
 
         public async Task<AuthenticationResponse> SignupAsync(string userName, string password)
@@ -84,7 +82,7 @@ namespace LibraryBookRenting.Services.Implements
         private AuthenticationResponse GenerateAuthenticationResponse(ApplicationUser newUser)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_jwtSettings.Secret);
+            var key = Encoding.ASCII.GetBytes(MyAppSettings.JwtSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]

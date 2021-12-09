@@ -11,6 +11,8 @@ namespace LibraryBookRenting.Data
 {
     public class DataContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Book> Books { get; set; }
+
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
         {
@@ -21,7 +23,6 @@ namespace LibraryBookRenting.Data
             base.OnModelCreating(builder);
 
             var entitiesAssembly = typeof(IEntity).Assembly;
-
             builder.RegisterEntityTypeConfiguration(entitiesAssembly);
             builder.AddRestrictDeleteBehaviorConvention();
         }
